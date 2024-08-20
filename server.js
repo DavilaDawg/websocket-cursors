@@ -12,7 +12,7 @@ const io = new Server(server, {
 });
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the WebSocket Cursors App!");
+  res.send("Welcome to the WebSocket Cursors Server!");
 });
 
 const cursors = new Map();
