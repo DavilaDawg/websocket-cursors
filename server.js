@@ -20,16 +20,14 @@ const cursors = new Map();
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
 
-  // Send all existing cursors to the new client
   socket.emit("allCursors", Array.from(cursors.entries()));
 
   socket.on("cursorMove", (data) => {
-    // Ensure x and y are between 0 and 1
     const x = Math.max(0, Math.min(1, data.x));
     const y = Math.max(0, Math.min(1, data.y));
 
     cursors.set(socket.id, { x, y });
-    // Broadcast to all clients except the sender
+
     socket.broadcast.emit("cursorUpdate", {
       id: socket.id,
       x,
